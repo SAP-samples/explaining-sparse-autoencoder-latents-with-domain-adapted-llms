@@ -1,0 +1,97 @@
+======================================================================
+FEATURE INDEX: 37522
+Record: q_sample=1, d_sample=0, m_sample=0
+======================================================================
+
+--- INPUT TOKENS (identical for both models, sorted by activation) ---
+
+  #  Token                      Quantile    Activation  Context
+---------------------------------------------------------------------------------------------------------
+  1  ' costing'                 0-5%            0.0219   material requirements planning (MRP), process order creation, and product costi
+  2  ' intuitive'               0-5%            0.0207    ## Use  The Travel Manager, with its simple and intuitive handling, is directe
+  3  ' cost'                    0-5%            0.0187   of Liabilities According to Infotype 1as the type of cost distribution. You mak
+  4  ' B'                       0-5%            0.0184  ------------------------ | -----------------------------------------------------
+  5  'Start'                    0-5%            0.0182   results.  ## Procedure  1.   Choose![Start of the navigation path](themes/sap-l
+  6  ' more'                    0-5%            0.0180    There is a separate workbench for handling Vacation Payments. For more informa
+  7  ' the'                     5-15%           0.0177   State University, wrote Hive of Dreams: Contemporary Science Fiction from the P
+  8  'sub'                      5-15%           0.0176   G. Reliability of detecting 'onset of pain' and 'submaximal pain' during neural
+  9  'Vol'                      5-15%           0.0176  /sap-light/img/navstep.gif)Voluntary Additional Pension![End of the navigation p
+ 10  ' of'                      5-15%           0.0169   run, select theRegular paymentfield, and enter the date of the advance payment.
+ 11  'Data'                     5-15%           0.0165   you want to archive.  ## Key Features  In theData To Be Archiveddropdown list b
+ 12  ' invasive'                5-15%           0.0165   al. Effectiveness of seven-valent pneumococcal conjugate vaccine against invasi
+ 13  'Formula'                  5-15%           0.0164  0-001-8",   "MolecularFormula": "C-H2-O",   "
+ 14  'Image'                    5-15%           0.0164   digital images with an automated microscope translation stage commercial softwa
+ 15  'Master'                   5-15%           0.0163  navend.gif)as follows:  -   Master Data– used to define default values for this 
+ 16  ' employee'                5-15%           0.0163    2.   In theSelectionsection, enter the employee selection criteria.  3. <bos>N
+ 17  ' is'                      5-15%           0.0163   salary evaluated for May in June, 2011 is 10 * 167 = UAH 
+ 18  'Wage'                     5-15%           0.0162  /sap-light/img/navstep.gif)Wage Types for Deductions With Balances and Totals![N
+ 19  'External'                 5-15%           0.0161   rule  If the sum ofGarnishable Netand theExternal Garnishable Netis greater tha
+ 20  ' by'                      15-30%          0.0160  argadhama is an eco-educational and tourism park promoted by the District Admini
+ 21  ' master'                  15-30%          0.0158    -   Determines the country grouping; relevant for master data entry, and setti
+ 22  ' BUT'                     15-30%          0.0158   . Select Change text objects and IDs and place the cursor on BUT000. Choose Tex
+ 23  ' amount'                  15-30%          0.0156  Garnishmentcalculation method. It can be either a variable amount rule or a fixe
+ 24  ' path'                    15-30%          0.0156   Customizing forPersonnel Managementby choosing![Start of the navigation path](t
+ 25  ' progress'                15-30%          0.0155   mode). During the write and delete phases the system produces regular progress 
+ 26  ' data'                    15-30%          0.0155   The description is the text that can help you to find your data in the BA2 Mana
+ 27  ' Vacation'                15-30%          0.0154  /img/navend.gif).  ---  # Vacation Registration  ## Use  This process supports t
+ 28  ' tax'                     15-30%          0.0154   Tax Reference Numberuniquely identifies the employer for payment of tax to a gi
+ 29  ' system'                  15-30%          0.0154  Content Repository name  -   Document ID in the storage system  -   Status of th
+ 30  ' Order'                   15-30%          0.0154  /img/navstep.gif)Functions and Settings for Order Types![Next navigation step](t
+ 31  'under'                    15-30%          0.0154  Set up the payment methods(in Customizing forPersonnel Managementunder![Start of
+ 32  'BC'                       15-30%          0.0154   implemented to use the paging function. For more information, seeBC - Basis-Ser
+ 33  ' link'                    15-30%          0.0153   task relates to one object method (that is, a technical link to system function
+ 34  ' or'                      15-30%          0.0152  capacity requirements records  If a work center is used in one or more objects, 
+ 35  'BACK'                     15-30%          0.0152  200 INPUT. CASE save_ok. WHEN 'BACK'. SET SCREEN 100. WHEN 'SAVE'.
+ 36  ' <'                       15-30%          0.0151   Framework -> System Configuration -> Recipients -> Assign Recipients  Namespace
+ 37  ' entered'                 15-30%          0.0151  BUS2089object type (Employee Trip) is entered as the triggering event of the wor
+ 38  ' under'                   15-30%          0.0151   the required basic settings in Customizing forPublic Sector Management, under![
+ 39  ' object'                  30-60%          0.0150   case, create the DataSource using either transaction RSDS or the object tree of
+ 40  ':'                        30-60%          0.0149  using the transaction codeSACEXPor using the Easy Access Menu:  ![Start of the n
+ 41  ' INT'                     30-60%          0.0147   records are as follows:  |     | FI accounts in INT account plan  | Debit    | 
+ 42  'Next'                     30-60%          0.0146   payroll area. You then proceed toCreate Planby choosing theNext Steppushbutton.
+ 43  'Req'                      30-60%          0.0142  /to be accounted, a workflow is started based on theReqAutoApprtemplate.  Templa
+ 44  ' are'                     30-60%          0.0142   salaried workers have a set salary, whereas wage-earners are paid for the work 
+ 45  'Der'                      30-60%          0.0139  /sap-light/img/navstep.gif)Derivation Strategy for Reassignment![Next navigation
+ 46  ' Ref'                     30-60%          0.0137                 | SHF3               | WRKS               | | Ref. date of PWS   
+ 47  '!['                       30-60%          0.0136  light/img/navstep.gif)Define Fix Values![End of the navigation path](themes/sap-
+ 48  ' vacation'                30-60%          0.0136   more information, refer to[Off-cycle payroll run for vacation payments report (
+ 49  ' collection'              30-60%          0.0136    -   One document to remove the check from the collection account and add it to
+ 50  ' choosing'                30-60%          0.0136   maintenance transaction for the database memory parameters for error stack tabl
+ 51  'Employee'                 30-60%          0.0136   the EPF deductions for a period.  ## Structure  Employee information:  -   Ente
+ 52  ' per'                     30-60%          0.0135   reimbursement. To determine the reimbursement amount, you can choose between pe
+ 53  'OL'                       30-60%          0.0135    -   Run transactionILM Policies(IRMPOL) and enter the required residence polic
+ 54  ' with'                    30-60%          0.0134   number of selected data records. The system selects all data records with a sta
+ 55  ' for'                     30-60%          0.0132   the table and chooseReverse. 5. Specify the reason for reversal and the posting
+ 56  ' benefit'                 30-60%          0.0132  gif).  If an hourly wage earner gets a monthly benefit, you also have to define 
+ 57  ' and'                     30-60%          0.0132   system, causing "speeding up" of various body systems and symptoms resembling a
+ 58  'at'                       30-60%          0.0131  0a174cb4.html)(General datatab page)  -   [Standard Value Editing](
+ 59  ' garn'                    60-100%         0.0129  )  ## Definition  A set of master data relating to garnishment information for t
+ 60  ' local'                   60-100%         0.0129   the presence of trigger points, tenderness to palpation, and local or referred 
+ 61  'Advance'                  60-100%         0.0128  /sap-light/img/navstep.gif)Advance Payment![Next navigation step](themes/sap-lig
+ 62  '2'                        60-100%         0.0128   this info in the processing log of the payroll functionP0205).  >  **Note**  Us
+ 63  'This'                     60-100%         0.0126   the workflow template.  >  **Note**  This "linkage" between the event and the w
+ 64  ' you'                     60-100%         0.0125  ## Use  FMLA absencesare "normal" absences that you enter using the Absences inf
+ 65  ' in'                      60-100%         0.0123   want to start the workflow template, the link must be activated in Customizing 
+ 66  ' on'                      60-100%         0.0122  According to Ukrainian legislation, the final reconciliation payments that emplo
+ 67  ' have'                    60-100%         0.0121   unpaid absence TSAU** are subtracted from the hours that should have been worke
+ 68  '-'                        60-100%         0.0120   to choose the ID of write from the input help.  -   Test Run  If you select thi
+ 69  ' already'                 60-100%         0.0120    When checking and approving travel requests and business trips that have alrea
+ 70  'The'                      60-100%         0.0118  sap-light/img/navend.gif).  TheFinnish Vacation Planning Reportscreen appears.  
+ 71  ' For'                     60-100%         0.0118   a garnishment order, you create a garnishment document. For more information, s
+ 72  ' starts'                  60-100%         0.0116   Lviv opens up, and Anton gets the job. He starts his new job on April 19.  You 
+ 73  ' support'                 60-100%         0.0116   can use the maintenance for storage parameters to better manage databases that 
+ 74  ' rate'                    60-100%         0.0115   thePercentagecan be omitted or can be less than the Statutory rate. However, th
+ 75  ' particular'              60-100%         0.0112   should take into consideration the other areas in SAP HR, in particular Personn
+ 76  ' rules'                   60-100%         0.0111   up for this.  Proration Rules  The general rules are:  Proration by number of m
+ 77  ' but'                     60-100%         0.0100   it can be useful not to deduct the amount all at once but rather to deduct the 
+ 78  ' following'               60-100%         0.0097  Client), then you must incorporate it manually.  Note the following when you wor
+
+======================================================================
+CPT DESCRIPTION (verbatim):
+======================================================================
+This SAE feature detects information related to data archiving, formulas, employee selection criteria, wage types for deductions, external contributions, master data entries, text objects and IDs, payroll calculations, vacation registration, payment methods, link to system functions, records management, data privacy, in-house cash (IHC) transactions, and derivation strategies for reassignment.
+
+======================================================================
+BASE DESCRIPTION (verbatim):
+======================================================================
+This feature detects concepts related to human resources and payroll processing within a specific software system, likely SAP. It activates strongly for terms like "Data," "Wage," and "Employee," indicating a focus on employee-related data and compensation. The broader distribution of tokens includes terms like "Tax," "Vacation," "Formula," and "Garnishment," further solidifying its connection to payroll calculations, benefits administration, and related HR processes.

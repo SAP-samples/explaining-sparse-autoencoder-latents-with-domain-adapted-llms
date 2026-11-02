@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CrossCoder Feature Viewer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/viewer.css') }}">
+</head>
+<body>
+
+<div id="topbar">
+  <span class="title">CrossCoder Viewer</span>
+  <a href="/" class="active">Feature Browser</a>
+  <a href="/runs">Pipeline Runs</a>
+  <select id="run-selector" style="margin-left:auto;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 8px;font-size:11px;color:var(--text);cursor:pointer;max-width:280px" onchange="switchRun(this.value)" title="Switch active dataset"></select>
+  <a id="download-csv-btn" href="/api/download_csv" download style="display:none;margin-left:8px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;color:var(--text);text-decoration:none">↓ CSV</a>
+  <button onclick="window.location='/settings'" style="margin-left:8px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;color:var(--text);cursor:pointer">⚙ Settings</button>
+</div>
+
+<!-- Token context modal -->
+<div id="ctx-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1001;align-items:flex-start;justify-content:center;padding-top:60px;overflow-y:auto">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;width:680px;max-width:95vw;margin-bottom:40px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="margin:0" id="ctx-title">Token Contexts</h3>
+      <button onclick="document.getElementById('ctx-modal').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <p style="margin:0 0 12px;font-size:12px;color:var(--muted)">Top activating contexts for this token. The highlighted token is shown with surrounding text. Activation strength shown on the right.</p>
+    <div id="ctx-list" style="display:flex;flex-direction:column;gap:10px">
+      <div style="color:var(--muted);font-size:12px">Loading…</div>
+    </div>
+  </div>
+</div>
+
+<div id="main">
+<!-- LEFT PANEL -->
+<div id="left">
+  <div id="filters">
+    <h2>CrossCoder Features</h2>
+    <input id="search" type="text" placeholder="Search label or feature ID…" oninput="debounceSearch()"/>
+    <div class="filter-section-label">Decoder Norm Flag <span class="info-icon">?<span class="info-tooltip">Compares the L2 norm of the CrossCoder's decoder vectors: ‖W_dec_A‖ vs ‖W_dec_B‖. A larger norm means the feature contributes more strongly to that model's residual stream. The classification uses the paper formula (Lindsey et al. 2025): <b>Δnorm = 0.5 × (1 + (‖B‖ − ‖A‖) / max(‖A‖, ‖B‖))</b>, range [0, 1]. <b>A</b> = Δnorm below lower threshold (feature dominant in Model A), <b>B</b> = Δnorm above upper threshold (dominant in Model B), <b>BOTH</b> = in between (shared). The thresholds are not fixed — adjust them by dragging the handles on the Δnorm histogram below.</span></span></div>
+    <div class="filter-row">
+      <span class="chip active" data-group="norm" data-val="" onclick="setFilter('norm_flag','')">All</span>
+      <span class="chip norm-a"    id="chip-norm-a" data-group="norm" data-val="A"    onclick="setFilter('norm_flag','A')">A</span>
+      <span class="chip norm-b"    id="chip-norm-b" data-group="norm" data-val="B"    onclick="setFilter('norm_flag','B')">B</span>
+      <span class="chip norm-both"                  data-group="norm" data-val="BOTH" onclick="setFilter('norm_flag','BOTH')">BOTH</span>
+    </div>
+    <div class="filter-section-label">Min activations</div>
+    <div style="padding:0 2px 8px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <input id="n-active-slider" type="range" min="0" max="10000" step="100" value="0"
+          style="flex:1;accent-color:var(--base)"
+          oninput="setNActive(this.value)"/>
+        <input id="n-active-input" type="number" min="0" step="100" value="0"
+          style="width:72px;padding:4px 6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px"
+          oninput="setNActive(this.value)"/>
+      </div>
+    </div>
+    <div class="filter-section-label">Sort by</div>
+    <div class="filter-row" style="gap:4px">
+      <select id="sort-select" onchange="setSort()" style="flex:1;padding:5px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;">
+        <option value="delta_norm">Δ Norm</option>
+        <option value="n_active">N Active</option>
+        <option value="feature_idx">Feature Index</option>
+      </select>
+      <button id="order-btn" onclick="toggleOrder()"
+        style="padding:5px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;cursor:pointer;">↓</button>
+    </div>
+  </div>
+  <div id="stats-bar">Loading…</div>
+
+  <div id="feature-list"></div>
+  <div id="load-more" style="display:none;padding:8px;text-align:center;color:var(--muted);font-size:12px;cursor:pointer" onclick="loadMore()">Load more…</div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div id="resize-handle"></div>
+<div id="right">
+  <div id="placeholder">← Select a feature</div>
+  <div id="detail" style="display:none"></div>
+</div>
+</div><!-- #main -->
+
+<script src="{{ url_for('static', filename='js/viewer.js') }}"></script>
+</body>
+</html>

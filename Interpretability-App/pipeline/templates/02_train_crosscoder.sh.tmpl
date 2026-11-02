@@ -1,0 +1,65 @@
+#!/bin/bash
+#SBATCH --job-name=cc_train_{{run_id}}
+#SBATCH --output={{log_dir}}/{{run_id}}_02_train_%j.out
+#SBATCH --error={{log_dir}}/{{run_id}}_02_train_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{cpus_per_task}}
+#SBATCH --gres={{gres_gpu}}
+#SBATCH --mem={{mem}}
+#SBATCH --partition={{partition}}
+
+set -euo pipefail
+exec > >(tee -a "{{run_log}}") 2>&1
+sleep 0.1  # wait for tee process to start (avoids race with set -euo pipefail)
+source {{venv}}
+source {{env_file}} 2>/dev/null || true
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+trap 'echo "ERROR: Job $SLURM_JOB_ID ({{run_id}} step 02) failed at line $LINENO — downstream jobs will not run" >&2' ERR
+
+echo "Job: $SLURM_JOB_ID  Node: $SLURMD_NODENAME  $(date)"
+echo "Run: {{run_id}}"
+echo "Step 02: Train CrossCoder v5 (BatchTopK)"
+echo "Model A: {{model_a}}  Layer A: {{layer_a}}  Model B: {{model_b}}  Layer B: {{layer_b}}"
+echo "n_features: {{n_features}}  k: {{topk}}"
+
+CKPT_DIR="$(dirname "{{cc_checkpoint}}")"
+mkdir -p "$CKPT_DIR"
+
+# LR scaled from paper (1e-3 at 50M tokens): 1e-3 * sqrt(total_tokens/50M)
+# Using fixed scaled value; adjust if dataset size changes significantly.
+LR=$(python3 -c "import math; print(f'{1e-3 * math.sqrt({{total_tokens}}/50_000_000):.2e}')")
+echo "Scaled LR: $LR"
+
+python -u "{{scripts_dir}}/02_train_crosscoder/final_scripts/train_crosscoder_v5.py" \
+    --acts-base        "{{acts_a}}" \
+    --acts-swallow     "{{acts_b}}" \
+    --n-features       {{n_features}} \
+    --topk             {{topk}} \
+    --aux-k            {{aux_k}} \
+    --aux-coeff        0.03125 \
+    --lr               "$LR" \
+    --warmup           {{warmup}} \
+    --epochs           5 \
+    --batch            2048 \
+    --save-every       5000 \
+    --code-norm-alpha  0.1 \
+    --norm-init-scale  {{norm_init_scale}} \
+    --out-dir          "$CKPT_DIR"
+
+# The training script writes cc_v5_btopk_f*_k*_lr*_<timestamp>.pt
+# Symlink the most recent checkpoint to the expected path
+LATEST=$(ls -t "$CKPT_DIR"/cc_v5_btopk_*.pt 2>/dev/null | head -1)
+if [ -n "$LATEST" ] && [ "$LATEST" != "{{cc_checkpoint}}" ]; then
+    ln -sf "$LATEST" "{{cc_checkpoint}}"
+    echo "Symlinked $LATEST -> {{cc_checkpoint}}"
+fi
+
+# Verify checkpoint was written
+if [ ! -L "{{cc_checkpoint}}" ] && [ ! -f "{{cc_checkpoint}}" ]; then
+    echo "ERROR: CrossCoder checkpoint missing: {{cc_checkpoint}}" >&2
+    exit 1
+fi
+echo "Done: $(date)"
+echo "Checkpoint: {{cc_checkpoint}}"

@@ -1,0 +1,120 @@
+======================================================================
+FEATURE INDEX: 39557
+CPT  record: q_sample=1, d_sample=1, m_sample=1
+BASE record: q_sample=1, d_sample=2, m_sample=0
+
+CPT  pred_acc (CPT judge):      0.3893
+BASE pred_acc (CPT judge):      0.2900
+Delta pred_acc:                 +0.0993
+======================================================================
+
+--- JUDGE SCORES ---
+
+Metric                           CPT desc  BASE desc
+----------------------------------------------------
+Pred Acc (CPT judge)               0.3893     0.2900
+Detection AUROC (CPT judge)        1.0000     0.9800
+Fuzzing Acc (CPT judge)            0.6667     0.6000
+Pred Acc (BASE+RAG judge)          0.4071     0.3403
+Detection AUROC (BASE+RAG)         1.0000     0.9800
+Fuzzing Acc (BASE+RAG)             0.3333     0.5333
+
+======================================================================
+INPUT TOKENS (identical for both models, q_sample=1, seed=39557001)
+Total active tokens for feature 39557: 151
+Explainer pool size: 82
+
+  #  Token                      Quantile   Activation  Context
+---------------------------------------------------------------------------------------------------------
+  1  ' government'              0-5%           0.0190   data is essential for a range of tax calculations, and for tax reporting purpos
+  2  ' Social'                  0-5%           0.0188  -light/img/navend.gif)  3.   Enter the required data on the selection screen and
+  3  'date'                     0-5%           0.0184   the type of material or the delivery format. Please refer to the attached guida
+  4  'STAT'                     0-5%           0.0182     Travel Management(FI-TV)    -   Travel expenses  -   Materials Management(MM)
+  5  ' XML'                     0-5%           0.0180  s contract in the HomologNet system, in compliance with Ordinance 1620 from July
+  6  'A'                        0-5%           0.0177   stimulate the employers to hire this category of employee. Since allowances hav
+  7  '5'                        0-5%           0.0177   code, the tax code source, and select the correct tax basis.  In the Starter’s 
+  8  ' calculate'               5-15%          0.0175     Gross social insurance amount  Other gross cumulations are assessment bases f
+  9  '\n\n'                     5-15%          0.0174    You use this component to calculate the holiday pay in Belgium.  ---  # Holida
+ 10  ' accurate'                5-15%          0.0173   the delivery format. Please refer to the attached guidance for additional infor
+ 11  ' (/'                      5-15%          0.0173  Note**  This is theGarnishable Netfrom another employment, taken into account by
+ 12  ' Management'              5-15%          0.0173  png)  ---  # Integration with Other Components  You can use the sectionIntegrati
+ 13  ' complex'                 5-15%          0.0167   the SAP customer base, as the Percentage Threshold Scheme only applies to “Smal
+ 14  ' calculates'              5-15%          0.0166    For more information on how and why you should use these specific reports, ref
+ 15  'Social'                   5-15%          0.0166  :  -   Collection Form for Severance Premium Reserve Fund (FGTS - Fundo de Garan
+ 16  ' environment'             5-15%          0.0161   events set asA - Absence Eventin customizing activitySet event types.  The chan
+ 17  ' with'                    5-15%          0.0160  ologNet (HBRCHMN0)  ## Use  This report generates the XML file needed to confirm
+ 18  'TAX'                      5-15%          0.0159  Annual![Next navigation step](themes/sap-light/img/navstep.gif)Tax![Next navigat
+ 19  ' emotional'               5-15%          0.0159  . The distinction between statements of nutritional support and claims regarding
+ 20  ' statement'               5-15%          0.0158  87424de10000000a174cb4.html)  There are also reports for working time reporting,
+ 21  ' course'                  5-15%          0.0158   exemptions always need to be for full quarters.  -   Service Exemption Start Da
+ 22  ' to'                      5-15%          0.0157   SAP provides to support compliance with the relevant legal requirements and dat
+ 23  ' screen'                  15-30%         0.0156  CP159![End of the navigation path](themes/sap-light/img/navend.gif).  2.   TheSu
+ 24  ' New'                     15-30%         0.0156  )  | Personnel area       | GB01          | | -------------------- | -----------
+ 25  ' consent'                 15-30%         0.0155                                                                                  
+ 26  ' Report'                  15-30%         0.0154   of Tax Deductions CP 159(RPCT59L0)  -   CP22 Report for Malaysia(RPCT2AL0)  -  
+ 27  'ACS'                      15-30%         0.0151  Final Payroll Processingcomponent delivers the necessary functions enabling you 
+ 28  ' of'                      15-30%         0.0150   additional specifications are defined according to the type of material or the 
+ 29  ' Chelsea'                 15-30%         0.0150   member of the Board of the Three Rivers Community College, he is also a member 
+ 30  ' Electronic'              15-30%         0.0149  aac6e7ced6a844338af4740b7442275a.html)  Related Information  [Defining an Interf
+ 31  'b'                        15-30%         0.0148  Recent notes: {{Account.List.notes}}  -   Recent service Cases: {{Account.List.C
+ 32  ' bank'                    15-30%         0.0147  Specific Transfer of Bank Data  Use  You use theCountry-Specific Transfer of Ban
+ 33  ' CA'                      15-30%         0.0147   in some ways. (Note: none of these are the fault of the presenters. They did a 
+ 34  ' document'                15-30%         0.0147  /img/navend.gif).  ---  # Employment Agreement Termination 2012 (Report HBRRTER3
+ 35  ' entitlement'             15-30%         0.0146  , planned work, base amounts for holiday pay for employees leaving, base amount 
+ 36  ')'                        15-30%         0.0146  )Subsequent activities![Next navigation step](themes/sap-light/img/navstep.gif)M
+ 37  ','                        15-30%         0.0146   comprises the activities that you must carry out after payroll (gross - net - p
+ 38  ' by'                      15-30%         0.0144  You use this report to generate the source file for edited data (AFDT) and the w
+ 39  'ANA'                      15-30%         0.0144  ca056afc7efce6f36.html).  For more information, see sectionRead Access Logging f
+ 40  ' compliant'               15-30%         0.0144   at least four weeks (that is, 20 days on a full-time basis) and no payment in l
+ 41  ' A'                       15-30%         0.0144   ordered limits for garnishments(UAGI) personnel calculation rule  -   Calculate
+ 42  ' employee'                15-30%         0.0144   will be used as tax paid figure in payroll.  P45 data is only used for calculat
+ 43  'Att'                      30-60%         0.0139   the employee retroactivelynegativetaxable amounts from a closed income period w
+ 44  ' Supplement'              30-60%         0.0139   employ data from Personnel Administration and generates wage types that are use
+ 45  ' reports'                 30-60%         0.0139  's Separate Report (HFIKATREER-PC00_M44_IR_ER)  ## Purpose  TheEmployer's Separa
+ 46  ' through'                 30-60%         0.0137  08, additional specifications are defined according to the type of material or t
+ 47  '1'                        30-60%         0.0137   the list display (for example: Display Variants, Sort Functions) to adjust the 
+ 48  'metadata'                 30-60%         0.0137  /0001/ChemicalComplianceInfo HTTP/1.1 ```  ### Response  >  **Sample Code**  ```
+ 49  'This'                     30-60%         0.0136  2)![End of the navigation path](themes/sap-light/img/navend.gif).  ---  # Homolo
+ 50  ' Payroll'                 30-60%         0.0136  0 vacation days. In 2003, the employee takes 30 vacation days, of which, 20 days
+ 51  ' Payment'                 30-60%         0.0135   BDI_IRM_OT_STT_HRCGB_PNFND | Determining the allowed start times for the archiv
+ 52  ' made'                    30-60%         0.0135  0015.  When off-cycle payroll accounting is performed on December 10th, only the
+ 53  'Ins'                      30-60%         0.0134  2e153038a424de10000000a174cb4.html)  ---  # GB Flexible Benefits Business Add-In
+ 54  ' benefits'                30-60%         0.0133  Ks are benefits not convertible into money, even though they have monetary value
+ 55  '.'                        30-60%         0.0133   regulations. From an employee's gross pay, theNetPayrollcomponent makes the nec
+ 56  ' be'                      30-60%         0.0132   benefit. For example, insurance providers require different information from he
+ 57  '0'                        30-60%         0.0132  E.2d 129 (1979) STATE of West Virginia v. Thomas R. BURTON. Supreme Court of App
+ 58  ' identify'                30-60%         0.0131   different perspectives, drill-down the data to investigate a root cause, and to
+ 59  ' Destroy'                 30-60%         0.0130   to the Destruction of Data](74db5ca71aad4585a2253427714bb1d7.html)  ---  # Dest
+ 60  'ONA'                      30-60%         0.0130  themes/sap-light/img/navstep.gif)Guidelines for Specific Processes![Next navigat
+ 61  '2'                        30-60%         0.0130  for Bonus isA. The system creates off-cycle results that start and end on the pa
+ 62  ' report'                  30-60%         0.0129   and tax obligations of the employee.  ## Integration  The data defined for this
+ 63  'V'                        60-100%        0.0125  # Selecting a Hotel Room  ## Prerequisites  You are assigned to a sales office t
+ 64  ' step'                    60-100%        0.0123   of the mail (with prefix US) in the data flow definition.  ---  # Standard Task
+ 65  'HAM'                      60-100%        0.0121   were challenged all day by UNLV in a game that had 18 lead changes and neither 
+ 66  ' calculation'             60-100%        0.0121  end.gif).  ## Integration  You can use the return value of the featureLTAXDto de
+ 67  'I'                        60-100%        0.0119       | HRBE_DIMON_DELETE_FRAMEWORK | Deactivation for Framework Data of HRCBEDIM
+ 68  ' K'                       60-100%        0.0118   read them than write them anyway. Susan: Tell us about that FABULOUS cover!!!! 
+ 69  'uses'                     60-100%        0.0116   to contractual requirements, which is composed of payments and deductions.  Exa
+ 70  ' waiter'                  60-100%        0.0114   Kiev, and on the weekend, he works as a waiter for a large restaurant chain. An
+ 71  ' compute'                 60-100%        0.0113   of the employee tax under Payroll Finland.  In Finland, the tax authority compu
+ 72  'Delete'                   60-100%        0.0113   more than one personnel number, the record will appear in the Non-Match area of
+ 73  'are'                      60-100%        0.0110   wage type (MA10) is posted as an expense. The secondary wage typesBank Transfer
+ 74  'field'                    60-100%        0.0109  Identity Numberfield: The first 6 digits must be the same as the employee’s birt
+ 75  ' record'                  60-100%        0.0108  . This difference can either be claimed as a net payment on the current period, 
+ 76  ' days'                    60-100%        0.0106   vacation days were accrued.  An employee may choose to partially utilize the ac
+ 77  '),'                       60-100%        0.0106   to pay wages and salaries to employees, while taking into consideration country
+ 78  ' distribute'              60-100%        0.0106  iches 281.xx)  ## Use  As receivers of taxable incomes, employees have to be inf
+ 79  ' and'                     60-100%        0.0105    Have an additional, detailed control medium for revisions  ## Key Features  Th
+ 80  'sector'                   60-100%        0.0102    **Note**  SAP delivers the following scenarios that you can use as an example:
+ 81  ' yourself'                60-100%        0.0100  4.html)  ---  # Bank Bills: Bill Charges  You can suppress the fields for bill c
+ 82  ' automatically'           60-100%        0.0095  End of the navigation path](themes/sap-light/img/navend.gif).  Posting Tax with 
+
+======================================================================
+CPT DESCRIPTION (q=1, d=1, m=1, verbatim):
+======================================================================
+This SAE feature detects information related to social security and tax-related documents and processes. It can identify various components such as the holiday pay calculation in Belgium, tax declaration forms, employer tax references, and legal documents such as Employment Agreement Termination. The feature also recognizes Brazilian occupation codes, payroll-related data, and various reports used in different countries, such as health insurance contributions and national insurance data. It can detect details about bank information, payment methods, and contributions to severance premium reserve funds. Additionally, it identifies information about benefits, wage types, and other employment-related data across various industries and sectors.
+
+======================================================================
+BASE DESCRIPTION (q=1, d=2, m=0, verbatim):
+======================================================================
+This feature detects concepts related to payroll, taxation, and employee benefits, particularly within a legal and compliance context. It identifies processes and terminology surrounding wage calculation, holiday pay, social security contributions, tax deductions, and reporting requirements for employees.

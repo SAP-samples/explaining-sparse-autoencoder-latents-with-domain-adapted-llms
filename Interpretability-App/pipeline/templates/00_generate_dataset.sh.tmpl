@@ -1,0 +1,39 @@
+#!/bin/bash
+#SBATCH --job-name=cc_gen_dataset_{{run_id}}
+#SBATCH --output={{log_dir}}/{{run_id}}_00_gen_%j.out
+#SBATCH --error={{log_dir}}/{{run_id}}_00_gen_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem={{mem}}
+#SBATCH --partition={{partition}}
+
+set -euo pipefail
+exec > >(tee -a "{{run_log}}") 2>&1
+sleep 0.1  # wait for tee process to start (avoids race with set -euo pipefail)
+source {{venv}}
+source {{env_file}} 2>/dev/null || true
+
+# On any failure: log it and exit non-zero so --dependency=afterok kills downstream jobs
+trap 'echo "ERROR: Job $SLURM_JOB_ID ({{run_id}} step 00) failed at line $LINENO — downstream jobs will not run" >&2' ERR
+
+echo "========================================"
+echo "Job: $SLURM_JOB_ID  Node: $SLURMD_NODENAME  $(date)"
+echo "Run: {{run_id}} | Step 00: Generate dataset"
+echo "Dataset A: {{dataset_a}}"
+echo "Dataset B: {{dataset_b}}"
+echo "Total tokens: {{total_tokens}}"
+echo "========================================"
+
+mkdir -p "$(dirname "{{dataset}}")"
+
+python -u "{{scripts_dir}}/00_generate_dataset/generate_dataset.py" \
+    --dataset-a   "{{dataset_a}}" \
+    {{subset_a_arg}}\
+    --dataset-b   "{{dataset_b}}" \
+    {{subset_b_arg}}\
+    --total-tokens {{total_tokens}} \
+    --out         "{{dataset}}"
+
+echo "Done: $(date)"
+echo "Output: {{dataset}}"

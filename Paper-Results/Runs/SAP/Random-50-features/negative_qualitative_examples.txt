@@ -1,0 +1,79 @@
+======================================================================
+NEGATIVE QUALITATIVE EXAMPLES — SAP Random-50 Features
+Features selected to illustrate failure modes of SAE features
+======================================================================
+
+======================================================================
+FEATURE 23910 — Syntactic / low-level pattern
+Summary: Fires on punctuation and generic tokens with no semantic content
+======================================================================
+
+  n_active:         5528
+  max_activation:   0.0269
+  mean_activation:  0.0128
+  judge_label:      Generic low-activation noise feature
+  judge_score:      3  (specificity=0, richness=2)
+
+  pred_acc  (CPT judge): -0.0301
+  det_auroc (CPT judge): 0.4433
+  fuzzing   (CPT judge): 0.4025
+
+--- CPT DESCRIPTION ---
+This SAE feature detects the presence of punctuation and symbols within text data, specifically focusing on periods, forward slashes, commas, and equal signs.
+
+--- TOP ACTIVATING TOKENS (by quantile, from CSV) ---
+  quantile_0_10: ' that', ' G', ' and', ' Jacques', ' we', ' went', '6', ' L', ' three', 'metadata', ' table', ' a', 'export', ' living', 'ography', 'BEGIN', ' AZ', 'de', 'Ze', ' he', ' those', ' Griffin', ' Mr', ' en
+  quantile_10_20: ' go', ' enjoy', 'as', "'", ' non', 'ents', ' setting', ' endured', 'n', ' Ze', ' to', 'eth', 'it', ' like', 'Tennessee', ' Me', ' Azure', 'IN', ' interventions', ' void', ' personal', ' glue', ' Do',
+  quantile_20_30: ' consumer', 'RFID', ' most', ' prix', ' Ta', 'ald', ' League', ':', ' seeds', ' related', ' cost', ' medicinal', ' yet', 'HER', ' Dive', ' woman', ' stopped', ' yellow', ' laptops', ' person', ' trip
+  quantile_30_40: ' sets', ' sold', ' an', ' SAP', 'Source', ' live', 'meaning', ' tropical', 'acrylic', ' flat', ' much', ' business', 'And', 'L', 'the', ' Item', 'ruzzo', ' Report', '(', ' enables', ' vitamins', ' Di
+  quantile_40_50: ' salt', ' paints', ' night', ' reference', ' selected', ' actively', 'extension', ' feels', ' teach', ' strange', ' gentle', ' victims', 'hoc', 'ibly', ' series', ' enriched', ' return', ' without', 
+
+======================================================================
+FEATURE 21749 — Out-of-domain / non-SAP
+Summary: Fires on sports commentary, medical research, and mixed noise — no SAP relevance
+======================================================================
+
+  n_active:         4131
+  max_activation:   0.0277
+  mean_activation:  0.0132
+  judge_label:      Generic low-activation noise feature
+  judge_score:      3  (specificity=0, richness=2)
+
+  pred_acc  (CPT judge): -0.0693
+  det_auroc (CPT judge): 0.3174
+  fuzzing   (CPT judge): 0.4173
+
+--- CPT DESCRIPTION ---
+This SAE feature likely detects content related to sports games, specifically events or details involving teams, players, and venues. It activates in contexts discussing various sports games, including soccer, football, and other athletic competitions, often within the context of planning, scheduling, or reporting on these events. It may also encompass discussions surrounding the rules, championships, and general aspects of sports-related activities.
+
+--- TOP ACTIVATING TOKENS (by quantile, from CSV) ---
+  quantile_0_10: ' White', '<', ' Park', '_', 'S', ' the', 'Data', ',', ' Help', ' (', 'claimer', '8', ' you', '-', ' parallel', ' her', ' have', ' Palace', ' Parry', ' GA', '0', 'BY', ' payroll', ' paper', ' how', 'T
+  quantile_10_20: ' Went', ' more', ' let', 'locale', ' United', 'Dis', '5', ' driver', 'OC', ' at', ' original', ' Contract', ' fax', ' Xavier', 'Non', ' apply', ' companies', ' this', ' or', ' between', 'Tor', 'ach',
+  quantile_20_30: ' bur', ' transaction', ' frequently', 'docs', ' into', 'ERP', ' patients', ' weeks', ' company', ' SV', ' therapeutic', ' an', ' provides', ' MSN', ' standard', ' guarantee', 'sley', ' main', 'll', '
+  quantile_30_40: ' B', ' york', ' helping', ' BM', 'called', ' University', ' payments', ' Who', ' insurance', 'ic', 'Administration', ' System', ' uses', 'Press', ' aspirations', 'ass', ' brist', ' substantial', 'ATO
+  quantile_40_50: ' Formation', 'righteous', 'In', ' least', ' personnel', 'Enh', ' stip', ' security', 'els', ' medications', ' Academy', ' su', '7', ' items', ' Liberty', ' amounts', ' warm', ' example', 'Learning', 
+
+======================================================================
+FEATURE 48477 — Polysemantic
+Summary: Fires across human anatomy, politics, software, sports — no coherent concept
+======================================================================
+
+  n_active:         15655
+  max_activation:   0.0275
+  mean_activation:  0.0128
+  judge_label:      Generic low-activation noise feature
+  judge_score:      2  (specificity=0, richness=1)
+
+  pred_acc  (CPT judge): 0.0061
+  det_auroc (CPT judge): 0.4656
+  fuzzing   (CPT judge): 0.4889
+
+--- CPT DESCRIPTION ---
+This SAE feature detects content related to various domains, including human anatomy, taxation, public health, integration within software systems, and political movements. It also identifies concepts related to legislation, education, business, and historical events. The feature activates with tokens such as 'has', '5', 'ptic', 'Integration', 'The', and 'UN', suggesting it is looking for information across a broad range of topics. It also activates with terms like 'mall', 'outlets', 'otype', 'researching', 'Annual', 'designated', 'Legal', and 'steal', indicating it might be capturing terms that pertain to both physical locations and legal or educational contexts. The presence of tokens in the 60-100% quantile, such as 'neighborhoods', 'found', 'Paris', 'defendant', 'having', 'year', 'four', 'Lead', 'As', 'jury', 'Ne', 'en', 'hero', 'minds', 'review', 'defendants', 'when', 'concret', and 'Pension', suggests the feature is also sensitive to terms that indicate analysis, legal procedures, and various aspects of daily life or business operations. The feature's activation is not limited to specific industries but spans various sectors where these terms
+
+--- TOP ACTIVATING TOKENS (by quantile, from CSV) ---
+  quantile_0_10: ' end', ' in', ' please', ' and', ' —', 'os', ' evidence', ' BB', ' Nas', ' us', ' Sunset', ' Pass', ' composing', 'Gl', 'ito', ' but', ' not', ' government', ' Il', 'aissez', '’', ':', ' Neb', ' of',
+  quantile_10_20: ' perd', 'R', ' travel', ' causes', 'med', ' describes', ' extracted', ' GB', 'H', ' British', ' As', ' lives', ' black', ' individually', ' Lik', ' Company', ' I', ' analysis', ' website', 'èn', ' pr
+  quantile_20_30: ' them', ' Khao', ' matters', ' initial', 'cro', 'controlled', ' joyful', 'ME', ' never', ' random', ' view', ' sport', 'enced', ' processing', 'Historical', ' Fellowship', ' star', 'wall', ' Times', 
+  quantile_30_40: 'Review', ' automobiles', 'amped', ' one', ' Journal', ' both', ' Soviet', ' published', ' Wet', ' Ballard', ' Vanderbilt', 'inities', ' Port', ' respondent', 'Nk', ' drug', ' leg', ' strong', ' isnt'
+  quantile_40_50: ' got', ' welcomed', ' specific', ' Special', ' side', '.”', ' pursuant', ' N', ' until', ' pistol', ' such', ' Available', ' Catholic', ' everything', ' Info', ' yourselves', ' &', ' View', ' Liberal

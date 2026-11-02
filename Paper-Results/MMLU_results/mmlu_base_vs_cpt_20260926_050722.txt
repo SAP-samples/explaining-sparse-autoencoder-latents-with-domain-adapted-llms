@@ -1,0 +1,69 @@
+============================================================
+MMLU: BASE vs CPT — 20260926_050722
+============================================================
+  Questions : 500  (seed=42, 5-shot)
+  BASE (gemma-3-12b-it) : 0.7100
+  CPT  (cpt-v6-iftv2)  : 0.6880
+  Delta (CPT-BASE)   : -0.0220
+
+  Subject                                         BASE     CPT    Delta     N
+---------------------------------------------------------------------------
+  jurisprudence                                  0.667   1.000   +0.333     3
+  abstract_algebra                               0.000   0.333   +0.333     3
+  high_school_chemistry                          0.429   0.714   +0.286     7
+  econometrics                                   0.250   0.500   +0.250     4
+  high_school_microeconomics                     0.667   0.917   +0.250    12
+  medical_genetics                               0.750   1.000   +0.250     4
+  human_aging                                    0.556   0.778   +0.222     9
+  virology                                       0.444   0.667   +0.222     9
+  public_relations                               0.600   0.800   +0.200     5
+  college_medicine                               0.800   1.000   +0.200     5
+  human_sexuality                                0.400   0.600   +0.200     5
+  high_school_psychology                         0.833   1.000   +0.167    18
+  college_biology                                0.500   0.667   +0.167     6
+  nutrition                                      0.769   0.923   +0.154    13
+  philosophy                                     0.778   0.889   +0.111     9
+  high_school_geography                          0.875   0.938   +0.062    16
+  professional_law                               0.571   0.571   +0.000    49
+  college_computer_science                       1.000   1.000   +0.000     1
+  moral_scenarios                                0.436   0.436   +0.000    39
+  sociology                                      1.000   1.000   +0.000     5
+  machine_learning                               0.667   0.667   +0.000     3
+  security_studies                               1.000   1.000   +0.000     7
+  us_foreign_policy                              1.000   1.000   +0.000     2
+  high_school_biology                            0.875   0.875   +0.000     8
+  international_law                              0.000   0.000   +0.000     1
+  logical_fallacies                              1.000   1.000   +0.000     4
+  business_ethics                                0.800   0.800   +0.000     5
+  global_facts                                   0.000   0.000   +0.000     2
+  college_chemistry                              0.333   0.333   +0.000     3
+  college_physics                                1.000   1.000   +0.000     2
+  professional_medicine                          1.000   1.000   +0.000     4
+  formal_logic                                   0.500   0.500   +0.000     4
+  high_school_government_and_politics            1.000   1.000   +0.000     6
+  astronomy                                      1.000   1.000   +0.000     1
+  miscellaneous                                  0.867   0.833   -0.033    30
+  high_school_macroeconomics                     0.706   0.647   -0.059    17
+  clinical_knowledge                             0.786   0.714   -0.071    14
+  marketing                                      1.000   0.923   -0.077    13
+  professional_psychology                        0.704   0.593   -0.111    27
+  elementary_mathematics                         0.688   0.562   -0.125    16
+  high_school_european_history                   0.750   0.625   -0.125     8
+  electrical_engineering                         0.750   0.625   -0.125     8
+  prehistory                                     0.750   0.583   -0.167    12
+  moral_disputes                                 0.818   0.636   -0.182    11
+  high_school_world_history                      1.000   0.800   -0.200    10
+  management                                     1.000   0.800   -0.200     5
+  conceptual_physics                             0.600   0.400   -0.200     5
+  high_school_us_history                         0.800   0.600   -0.200     5
+  professional_accounting                        0.800   0.600   -0.200    10
+  world_religions                                0.800   0.600   -0.200     5
+  high_school_statistics                         0.625   0.375   -0.250     8
+  high_school_mathematics                        0.750   0.500   -0.250     4
+  college_mathematics                            0.667   0.333   -0.333     3
+  high_school_physics                            0.667   0.167   -0.500     6
+  computer_security                              1.000   0.500   -0.500     4
+  anatomy                                        0.500   0.000   -0.500     2
+  high_school_computer_science                   1.000   0.333   -0.667     3
+
+============================================================

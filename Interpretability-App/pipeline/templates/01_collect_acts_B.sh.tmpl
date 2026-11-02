@@ -1,0 +1,43 @@
+#!/bin/bash
+#SBATCH --job-name=cc_acts_B_{{run_id}}
+#SBATCH --output={{log_dir}}/{{run_id}}_01B_acts_%j.out
+#SBATCH --error={{log_dir}}/{{run_id}}_01B_acts_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{cpus_per_task}}
+#SBATCH --gres={{gres_gpu}}
+#SBATCH --mem={{mem}}
+#SBATCH --partition={{partition}}
+
+set -euo pipefail
+exec > >(tee -a "{{run_log}}") 2>&1
+sleep 0.1  # wait for tee process to start (avoids race with set -euo pipefail)
+source {{venv}}
+source {{env_file}} 2>/dev/null || true
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+trap 'echo "ERROR: Job $SLURM_JOB_ID ({{run_id}} step 01B) failed at line $LINENO — downstream jobs will not run" >&2' ERR
+
+echo "========================================"
+echo "Job: $SLURM_JOB_ID  Node: $SLURMD_NODENAME  $(date)"
+echo "Run: {{run_id}} | Step 01B: Collect activations — Model B (CPT)"
+echo "Model: {{model_b}}  Layer: {{layer_b}}"
+echo "========================================"
+
+mkdir -p "$(dirname "{{acts_b}}")"
+
+python -u "{{scripts_dir}}/01_collect_activations/collect_activations.py" \
+    --model   "{{model_b}}" \
+    --dataset "{{dataset}}" \
+    --layer   {{layer_b}} \
+    --split   train \
+    --domain  all \
+    --out     "{{acts_b}}"
+
+# Verify output was written and is non-empty
+if [ ! -f "{{acts_b}}" ] || [ ! -s "{{acts_b}}" ]; then
+    echo "ERROR: Output file missing or empty: {{acts_b}}" >&2
+    exit 1
+fi
+echo "Done: $(date)"
+echo "Output: {{acts_b}}  ($(du -sh "{{acts_b}}" | cut -f1))"

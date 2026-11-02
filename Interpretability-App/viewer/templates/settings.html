@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Settings — CrossCoder Viewer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+</head>
+<body>
+<div id="save-toast">Settings saved!</div>
+<div id="topbar">
+  <span class="title">CrossCoder Viewer</span>
+  <a href="/">Feature Browser</a>
+  <a href="/runs">Pipeline Runs</a>
+  <a href="/settings" class="active">Settings</a>
+</div>
+<div id="content">
+  <h2 style="margin-bottom:20px">Settings</h2>
+
+  <div class="section">
+    <h3>Model Labels</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Rename the two models shown in filter chips and badges. Changes are saved to <code>Webapp-Storage/settings.json</code>.</p>
+    <div class="form-row">
+      <label>Model A label</label>
+      <input id="s-label-a" type="text" placeholder="e.g. gemma-2-2b">
+    </div>
+    <div class="form-row">
+      <label>Model B label</label>
+      <input id="s-label-b" type="text" placeholder="e.g. Gemma-2-Llama-Swallow-2b">
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" onclick="saveLabels()">Save labels</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Δnorm Thresholds</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Controls the classification boundary for the Decoder Norm Flag. Drag the histogram handles or type values directly.</p>
+    <canvas id="dnorm-canvas" width="580" height="90" style="width:100%;border-radius:6px;display:block;cursor:crosshair;margin-bottom:10px"></canvas>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+      <label id="lo-label" style="font-size:12px;color:var(--muted);white-space:nowrap">A &lt;</label>
+      <input id="lo-input" type="number" min="0" max="1" step="0.01" value="0.1"
+        style="width:70px;padding:5px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:13px;"
+        oninput="onThreshInput()"/>
+      <label id="hi-label" style="font-size:12px;color:var(--muted);white-space:nowrap">B &gt;</label>
+      <input id="hi-input" type="number" min="0" max="1" step="0.01" value="0.9"
+        style="width:70px;padding:5px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:13px;"
+        oninput="onThreshInput()"/>
+    </div>
+    <div id="thresh-counts" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+  </div>
+
+  <div class="section">
+    <h3>Bookmarked Features</h3>
+    <div id="bm-list"><div style="padding:8px 12px;color:var(--muted)">No bookmarks yet.</div></div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+</body>
+</html>

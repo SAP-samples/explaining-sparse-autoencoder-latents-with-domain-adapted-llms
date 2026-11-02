@@ -1,0 +1,64 @@
+#!/bin/bash
+#SBATCH --job-name=cc_llmaaj_{{run_id}}
+#SBATCH --output={{log_dir}}/{{run_id}}_04_llmaaj_%j.out
+#SBATCH --error={{log_dir}}/{{run_id}}_04_llmaaj_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{cpus_per_task}}
+#SBATCH --gres={{gres_gpu}}
+#SBATCH --mem={{mem}}
+#SBATCH --partition={{partition}}
+
+set -euo pipefail
+exec > >(tee -a "{{run_log}}") 2>&1
+sleep 0.1  # wait for tee process to start (avoids race with set -euo pipefail)
+source {{venv}}
+source {{env_file}} 2>/dev/null || true
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+trap 'echo "ERROR: Job $SLURM_JOB_ID ({{run_id}} step 04 LLMaaJ) failed at line $LINENO" >&2' ERR
+
+echo "========================================"
+echo "Job: $SLURM_JOB_ID  Node: $SLURMD_NODENAME  $(date)"
+echo "Run: {{run_id}} | Step 04: LLM-as-a-Judge + norm/freq classification"
+echo "========================================"
+
+OUT_DIR="$(dirname "{{llmaaj_csv}}")"
+mkdir -p "$OUT_DIR"
+
+CC_ACTS_META="{{cc_acts_meta}}"
+if [ ! -f "$CC_ACTS_META" ]; then
+    echo "ERROR: CC activations meta not found: $CC_ACTS_META"
+    exit 1
+fi
+
+python -u "{{scripts_dir}}/04_LLMaaJ/crosscoder_llm_judge.py" \
+    --cc-acts-meta        "$CC_ACTS_META" \
+    --crosscoder          "{{cc_checkpoint}}" \
+    --dataset             "{{dataset}}" \
+    --model-a             "{{model_a}}" \
+    --acts-a              "{{acts_a}}" \
+    --acts-b              "{{acts_b}}" \
+    --domain-a-label      "{{model_a_short}}" \
+    --domain-b-label      "{{model_b_short}}" \
+    --freq-n-sample       200000 \
+    --out-dir             "$OUT_DIR" \
+    --n-quantiles         10 \
+    --tokens-per-quantile 50 \
+    --context-window      10 \
+    --workers             8 \
+    --delta-norm-threshold 0.1 \
+    --freq-ratio-threshold 5.0 \
+    --checkpoint-every    500 \
+    --judge-top-n         {{judge_top_n}} \
+    --judge-model         "anthropic--claude-sonnet-4-6"
+
+# Rename the timestamped output CSV to the canonical expected path
+LATEST_CSV=$(ls -t "$OUT_DIR"/crosscoder_features_*.csv 2>/dev/null | head -1)
+if [ -n "$LATEST_CSV" ]; then
+    mv "$LATEST_CSV" "{{llmaaj_csv}}"
+    echo "Renamed $LATEST_CSV -> {{llmaaj_csv}}"
+fi
+
+echo "Done: $(date)"
+echo "CSV: {{llmaaj_csv}}"

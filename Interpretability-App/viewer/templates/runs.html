@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CrossCoder Pipeline Runs</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/runs.css') }}">
+</head>
+<body>
+<div id="copy-toast">Path copied!</div>
+<div id="step-log-modal">
+  <div id="step-log-box">
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+      <div id="step-log-title"></div>
+      <button id="step-log-close" onclick="closeStepLog()">✕ Close</button>
+    </div>
+    <div id="step-log-file"></div>
+    <pre id="step-log-pre">Loading...</pre>
+  </div>
+</div>
+
+<div id="topbar">
+  <span class="title">CrossCoder Viewer</span>
+  <a href="/">Feature Browser</a>
+  <a href="/runs" class="active">Pipeline Runs</a>
+  <a href="/settings" style="margin-left:auto">⚙ Settings</a>
+</div>
+
+<div id="content">
+<!-- LEFT: run list -->
+<div id="run-list-pane">
+  <div id="run-list-header">
+    <h2>Runs</h2>
+    <button id="new-run-btn" onclick="openNewRunModal()">+ New Run</button>
+  </div>
+  <div id="run-list">Loading…</div>
+</div>
+
+<!-- RIGHT: run detail -->
+<div id="run-detail-pane">
+  <div id="run-placeholder">
+    <span style="font-size:40px">🔬</span>
+    <span>Select a run or create a new one</span>
+  </div>
+  <div id="run-detail" style="display:none"></div>
+</div>
+</div>
+
+<!-- New Run Modal -->
+<div id="new-run-modal">
+  <div id="new-run-form">
+    <h2>New Pipeline Run</h2>
+    <div id="form-error"></div>
+    <div class="form-group">
+      <label>Run Name <span style="color:#ef4444">*</span></label>
+      <input id="f-name" placeholder="e.g. gemma2-swallow-layer25  or  llama3-medical-v2"/>
+      <div class="hint">A short memorable name — makes it easy to find this run later in the Feature Browser</div>
+    </div>
+    <div class="form-group">
+      <label>Model A — Base / reference model (HF ID or cluster path)</label>
+      <input id="f-model-a" placeholder="google/gemma-2-2b  or  /fsx/.../model"/>
+      <div class="hint">The reference model (before fine-tuning / CPT)</div>
+    </div>
+    <div class="form-group">
+      <label>Model B — Fine-tuned / CPT model (HF ID or cluster path)</label>
+      <input id="f-model-b" placeholder="org/my-finetuned-model  or  /fsx/.../model"/>
+      <div class="hint">The adapted model to compare against A</div>
+    </div>
+    <div class="form-group">
+      <label>Dataset A — Source for domain/distribution A (HF ID or cluster path)</label>
+      <input id="f-dataset-a" placeholder="HuggingFaceFW/fineweb  or  /path/to/data.jsonl"/>
+      <div class="hint">e.g. general web text, English, medical — HF dataset ID or local JSONL</div>
+    </div>
+    <div class="form-group">
+      <label>Dataset B — Source for domain/distribution B (HF ID or cluster path)</label>
+      <input id="f-dataset-b" placeholder="HuggingFaceFW/fineweb-2  or  /path/to/data.jsonl"/>
+      <div class="hint">e.g. Japanese, business documents, code — HF dataset ID or local JSONL</div>
+    </div>
+
+    <div id="model-info-box" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:12px;margin-bottom:14px">
+      <span style="color:var(--muted)">Detected from Model A: </span>
+      <span id="info-dmodel" style="color:var(--blue);font-weight:600"></span>
+      <span style="color:var(--muted);margin-left:10px">layers: </span>
+      <span id="info-numlayers" style="color:var(--text);font-weight:600"></span>
+      <span style="color:var(--muted);margin-left:10px">→ n_features: </span>
+      <span id="info-nfeatures" style="color:var(--green);font-weight:600"></span>
+      <span style="color:var(--muted);margin-left:10px">aux_k: </span>
+      <span id="info-auxk" style="color:var(--purple);font-weight:600"></span>
+    </div>
+    <div id="model-b-info-box" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:12px;margin-bottom:14px">
+      <span style="color:var(--muted)">Detected from Model B: </span>
+      <span id="info-b-numlayers" style="color:var(--text);font-weight:600"></span>
+      <span id="info-b-warn" style="color:#f97316;margin-left:10px;display:none"></span>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Layer index — Model A</label>
+        <input id="f-layer-a" type="number" value="25" oninput="validateLayers()"/>
+        <div class="hint" id="hint-layer-a">0-indexed. Last layer of Gemma-2-2b = 25</div>
+      </div>
+      <div class="form-group">
+        <label>Layer index — Model B <span style="color:var(--muted);font-weight:400">(default: same as A)</span></label>
+        <input id="f-layer-b" type="number" placeholder="same as A" oninput="validateLayers()"/>
+        <div class="hint" id="hint-layer-b">Leave empty to use the same layer as Model A</div>
+      </div>
+    </div>
+    <div id="layer-error" style="display:none;color:#ef4444;font-size:12px;margin-bottom:10px"></div>
+
+    <div class="advanced-toggle" onclick="toggleAdvanced()">▸ Advanced options</div>
+    <div id="advanced-fields">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Expansion Factor <span style="color:var(--muted);font-weight:400">(n_features = factor × d_model)</span></label>
+          <input id="f-expansion-factor" type="number" value="32" min="1" max="64" oninput="updateNFeatures()"/>
+          <div class="hint">Paper default: 32. Larger = more features, more GPU memory.</div>
+        </div>
+        <div class="form-group">
+          <label>TopK (k) — active features per token</label>
+          <input id="f-topk" type="number" value="100"/>
+          <div class="hint">How many features fire per token</div>
+        </div>
+      </div>
+      <div id="nfeatures-preview" style="font-size:12px;color:var(--muted);margin-bottom:14px;display:none">
+        → n_features = <span id="nf-val" style="color:var(--green);font-weight:600"></span>
+        <span style="margin-left:6px;color:var(--muted)">(factor × d_model)</span>
+      </div>
+      <div class="form-group">
+        <label>Total dataset tokens</label>
+        <input id="f-total-tokens" type="number" value="20000000"/>
+        <div class="hint">Split 50/50 between Dataset A and B</div>
+      </div>
+      <div class="form-group">
+        <label>LLM Judge — max features to judge <span style="color:var(--muted);font-weight:400">(leave empty = all)</span></label>
+        <input id="f-judge-top-n" type="number" placeholder="all alive features"/>
+        <div class="hint">Set to e.g. 100 for a quick test run (~5 min vs 2+ hours)</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Warmup steps</label>
+          <input id="f-warmup" type="number" value="1000"/>
+          <div class="hint">Paper default: 1000</div>
+        </div>
+        <div class="form-group">
+          <label>Norm init scale</label>
+          <input id="f-norm-init-scale" type="number" value="1.0" step="0.001"/>
+          <div class="hint">BatchTopK paper default: 1.0</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Existing dataset path (skip generation)</label>
+        <input id="f-existing-dataset" placeholder="Leave empty to generate from scratch"/>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeNewRunModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitNewRun()">Submit Pipeline Run</button>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/runs.js') }}"></script>
+</body>
+</html>

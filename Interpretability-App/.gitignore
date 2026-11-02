@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment / secrets
+.env
+*.env
+
+# Generated run data (can be GBs / TBs)
+data/
+checkpoints/
+runs/
+logs/
+analysis/
+
+# Model weights & large binary artefacts
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.npy
+*.npz
+
+# SLURM output files
+*.out
+*.err
+
+# Old/experimental scripts (kept locally, not for public repo)
+scripts/00_generate_dataset/generate_dataset_crosscoder_japanese.py
+scripts/00_generate_dataset/generate_dataset_crosscoder_japanese.sh
+scripts/00_generate_dataset/generate_dataset_crosscoder_japanese_10M.sh
+scripts/01_collect_activations/collect_activations_gemma2.py
+scripts/01_collect_activations/collect_acts_base-model_train-set_all-lang.sh
+scripts/01_collect_activations/collect_acts_base-model_train-set_all-lang_10M.sh
+scripts/01_collect_activations/collect_acts_base-model_train-set_en-lang.sh
+scripts/01_collect_activations/collect_acts_base-model_train-set_ja-lang.sh
+scripts/01_collect_activations/collect_acts_swallow-model_train-set_all-lang.sh
+scripts/01_collect_activations/collect_acts_swallow-model_train-set_all-lang_10M.sh
+scripts/01_collect_activations/collect_acts_swallow-model_train-set_en-lang.sh
+scripts/01_collect_activations/collect_acts_swallow-model_train-set_ja-lang.sh
+scripts/02_train_crosscoder/final_scripts/job_v5_10M.sh
+scripts/03_collect_crosscoder_acts/job_collect_cc_acts_test.sh
+scripts/04_LLMaaJ/job_llmaaj.sh
+scripts/04_LLMaaJ/job_recompute_norms.sh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,300 @@
+{
+  "timestamp": "20260926_050722",
+  "n_questions": 500,
+  "n_fewshot": 5,
+  "seed": 42,
+  "base_endpoint": "http://gpu-dy-g524xlarge-5:18003/v1",
+  "cpt_endpoint": "http://gpu-dy-g524xlarge-6:18002/v1",
+  "base_model": "gemma-3-12b-it",
+  "cpt_model": "cpt-v6-iftv2",
+  "base_acc": 0.71,
+  "cpt_acc": 0.688,
+  "delta_cpt_minus_base": -0.02200000000000002,
+  "per_subject": {
+    "professional_law": {
+      "base_acc": 0.5714285714285714,
+      "cpt_acc": 0.5714285714285714,
+      "n": 49
+    },
+    "prehistory": {
+      "base_acc": 0.75,
+      "cpt_acc": 0.5833333333333334,
+      "n": 12
+    },
+    "miscellaneous": {
+      "base_acc": 0.8666666666666667,
+      "cpt_acc": 0.8333333333333334,
+      "n": 30
+    },
+    "high_school_geography": {
+      "base_acc": 0.875,
+      "cpt_acc": 0.9375,
+      "n": 16
+    },
+    "public_relations": {
+      "base_acc": 0.6,
+      "cpt_acc": 0.8,
+      "n": 5
+    },
+    "elementary_mathematics": {
+      "base_acc": 0.6875,
+      "cpt_acc": 0.5625,
+      "n": 16
+    },
+    "college_computer_science": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 1
+    },
+    "high_school_world_history": {
+      "base_acc": 1.0,
+      "cpt_acc": 0.8,
+      "n": 10
+    },
+    "high_school_psychology": {
+      "base_acc": 0.8333333333333334,
+      "cpt_acc": 1.0,
+      "n": 18
+    },
+    "professional_psychology": {
+      "base_acc": 0.7037037037037037,
+      "cpt_acc": 0.5925925925925926,
+      "n": 27
+    },
+    "moral_scenarios": {
+      "base_acc": 0.4358974358974359,
+      "cpt_acc": 0.4358974358974359,
+      "n": 39
+    },
+    "high_school_physics": {
+      "base_acc": 0.6666666666666666,
+      "cpt_acc": 0.16666666666666666,
+      "n": 6
+    },
+    "nutrition": {
+      "base_acc": 0.7692307692307693,
+      "cpt_acc": 0.9230769230769231,
+      "n": 13
+    },
+    "high_school_us_history": {
+      "base_acc": 0.8,
+      "cpt_acc": 0.6,
+      "n": 5
+    },
+    "clinical_knowledge": {
+      "base_acc": 0.7857142857142857,
+      "cpt_acc": 0.7142857142857143,
+      "n": 14
+    },
+    "econometrics": {
+      "base_acc": 0.25,
+      "cpt_acc": 0.5,
+      "n": 4
+    },
+    "sociology": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 5
+    },
+    "college_biology": {
+      "base_acc": 0.5,
+      "cpt_acc": 0.6666666666666666,
+      "n": 6
+    },
+    "high_school_macroeconomics": {
+      "base_acc": 0.7058823529411765,
+      "cpt_acc": 0.6470588235294118,
+      "n": 17
+    },
+    "philosophy": {
+      "base_acc": 0.7777777777777778,
+      "cpt_acc": 0.8888888888888888,
+      "n": 9
+    },
+    "college_medicine": {
+      "base_acc": 0.8,
+      "cpt_acc": 1.0,
+      "n": 5
+    },
+    "high_school_chemistry": {
+      "base_acc": 0.42857142857142855,
+      "cpt_acc": 0.7142857142857143,
+      "n": 7
+    },
+    "machine_learning": {
+      "base_acc": 0.6666666666666666,
+      "cpt_acc": 0.6666666666666666,
+      "n": 3
+    },
+    "security_studies": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 7
+    },
+    "college_mathematics": {
+      "base_acc": 0.6666666666666666,
+      "cpt_acc": 0.3333333333333333,
+      "n": 3
+    },
+    "us_foreign_policy": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 2
+    },
+    "professional_accounting": {
+      "base_acc": 0.8,
+      "cpt_acc": 0.6,
+      "n": 10
+    },
+    "management": {
+      "base_acc": 1.0,
+      "cpt_acc": 0.8,
+      "n": 5
+    },
+    "high_school_european_history": {
+      "base_acc": 0.75,
+      "cpt_acc": 0.625,
+      "n": 8
+    },
+    "high_school_biology": {
+      "base_acc": 0.875,
+      "cpt_acc": 0.875,
+      "n": 8
+    },
+    "marketing": {
+      "base_acc": 1.0,
+      "cpt_acc": 0.9230769230769231,
+      "n": 13
+    },
+    "electrical_engineering": {
+      "base_acc": 0.75,
+      "cpt_acc": 0.625,
+      "n": 8
+    },
+    "international_law": {
+      "base_acc": 0.0,
+      "cpt_acc": 0.0,
+      "n": 1
+    },
+    "logical_fallacies": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 4
+    },
+    "moral_disputes": {
+      "base_acc": 0.8181818181818182,
+      "cpt_acc": 0.6363636363636364,
+      "n": 11
+    },
+    "human_aging": {
+      "base_acc": 0.5555555555555556,
+      "cpt_acc": 0.7777777777777778,
+      "n": 9
+    },
+    "business_ethics": {
+      "base_acc": 0.8,
+      "cpt_acc": 0.8,
+      "n": 5
+    },
+    "abstract_algebra": {
+      "base_acc": 0.0,
+      "cpt_acc": 0.3333333333333333,
+      "n": 3
+    },
+    "human_sexuality": {
+      "base_acc": 0.4,
+      "cpt_acc": 0.6,
+      "n": 5
+    },
+    "high_school_microeconomics": {
+      "base_acc": 0.6666666666666666,
+      "cpt_acc": 0.9166666666666666,
+      "n": 12
+    },
+    "global_facts": {
+      "base_acc": 0.0,
+      "cpt_acc": 0.0,
+      "n": 2
+    },
+    "medical_genetics": {
+      "base_acc": 0.75,
+      "cpt_acc": 1.0,
+      "n": 4
+    },
+    "world_religions": {
+      "base_acc": 0.8,
+      "cpt_acc": 0.6,
+      "n": 5
+    },
+    "college_chemistry": {
+      "base_acc": 0.3333333333333333,
+      "cpt_acc": 0.3333333333333333,
+      "n": 3
+    },
+    "computer_security": {
+      "base_acc": 1.0,
+      "cpt_acc": 0.5,
+      "n": 4
+    },
+    "college_physics": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 2
+    },
+    "professional_medicine": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 4
+    },
+    "virology": {
+      "base_acc": 0.4444444444444444,
+      "cpt_acc": 0.6666666666666666,
+      "n": 9
+    },
+    "high_school_statistics": {
+      "base_acc": 0.625,
+      "cpt_acc": 0.375,
+      "n": 8
+    },
+    "jurisprudence": {
+      "base_acc": 0.6666666666666666,
+      "cpt_acc": 1.0,
+      "n": 3
+    },
+    "formal_logic": {
+      "base_acc": 0.5,
+      "cpt_acc": 0.5,
+      "n": 4
+    },
+    "high_school_government_and_politics": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 6
+    },
+    "conceptual_physics": {
+      "base_acc": 0.6,
+      "cpt_acc": 0.4,
+      "n": 5
+    },
+    "high_school_mathematics": {
+      "base_acc": 0.75,
+      "cpt_acc": 0.5,
+      "n": 4
+    },
+    "anatomy": {
+      "base_acc": 0.5,
+      "cpt_acc": 0.0,
+      "n": 2
+    },
+    "high_school_computer_science": {
+      "base_acc": 1.0,
+      "cpt_acc": 0.3333333333333333,
+      "n": 3
+    },
+    "astronomy": {
+      "base_acc": 1.0,
+      "cpt_acc": 1.0,
+      "n": 1
+    }
+  }
+}

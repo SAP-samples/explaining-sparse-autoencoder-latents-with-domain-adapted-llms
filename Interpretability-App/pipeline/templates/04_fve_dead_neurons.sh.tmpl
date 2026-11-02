@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --job-name=cc_fve_{{run_id}}
+#SBATCH --output={{log_dir}}/{{run_id}}_04_fve_%j.out
+#SBATCH --error={{log_dir}}/{{run_id}}_04_fve_%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task={{cpus_per_task}}
+#SBATCH --gres={{gres_gpu}}
+#SBATCH --mem={{mem}}
+#SBATCH --partition={{partition}}
+
+set -euo pipefail
+exec > >(tee -a "{{run_log}}") 2>&1
+sleep 0.1  # wait for tee process to start (avoids race with set -euo pipefail)
+source {{venv}}
+source {{env_file}} 2>/dev/null || true
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+trap 'echo "ERROR: Job $SLURM_JOB_ID ({{run_id}} step 04b FVE) failed at line $LINENO" >&2' ERR
+
+echo "Job: $SLURM_JOB_ID  Node: $SLURMD_NODENAME  $(date)"
+echo "Run: {{run_id}}"
+echo "Step 04b: FVE + Dead Neurons (eval split)"
+
+mkdir -p "$(dirname "{{fve_json}}")"
+
+python -u "{{scripts_dir}}/05_fve_dead_neurons/fve_dead_neurons.py" \
+    --model-a     "{{model_a}}" \
+    --model-b     "{{model_b}}" \
+    --crosscoder  "{{cc_checkpoint}}" \
+    --dataset     "{{dataset}}" \
+    --layer       {{layer_a}} \
+    --split       validation \
+    --out         "{{fve_json}}"
+
+echo "Done: $(date)"
+echo "Metrics: {{fve_json}}"
